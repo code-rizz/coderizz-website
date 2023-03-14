@@ -49,3 +49,5 @@ def update(request):
             return render(request,'update.html',locals())
     else:
         return HttpResponse("not allowed")
+
+    #else:
