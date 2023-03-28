@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
+        <link rel = "icon" href ={% static 'main/images/logo.png' %}
+        type = "image/x-icon">
+        <title>CODERIZZ</title>
+    <!--
+    SOFTY PINKO
+    https://templatemo.com/tm-535-softy-pinko
+    -->
+    
+        <!-- Additional CSS Files -->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/font-awesome.css' %}">
+
+    <link rel="stylesheet" href="{% static 'main/css/templatemo-softy-pinko.css' %}">
+    
+    </head>
+<body>
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <!-- <a href="#" class="logo">
+                        <img src="assets/images/logo.png" alt="Softy Pinko"/>
+                    </a> -->
+                    <p style="background: -webkit-linear-gradient(233deg,#0c1467, #832a7a);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                     font-size:1.5rem;
+                     font-family:sans-serif; float: left; padding: 22px ;font-weight:bolder;">CODERIZZ</p>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="/" >Home</a></li>
+                        <li><a href="/#features">About</a></li>
+                        <li><a href="/#work-process">Projects</a></li>
+                        <li><a href="/events">Events</a></li>
+                        <li><a href="/ide">IDE</a></li>
+                        <li><a href="/#contact-us">Contact Us</a></li>
+                        <li><a href="/login" class="active"><i class="fa fa-sign-in fa-lg" aria-hidden="true"></i></a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div >
+
+
+<section class="vh-100 ">
+    <div class="p-10"></div>
+    <div class="container-fluid h-custom " style="  /* Fallback for browsers do NOT support vh unit */
+    height: 100vh; /* These two lines are counted as one :-)       */
+  
+    ">
+      <div class="row d-flex justify-content-center align-items-center h-100 " style="padding-top:150px">
+        <div class="col-md-9 col-lg-6 col-xl-5 "  data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+          <img src="{% static 'main/images/final mascot.png' %}"
+            class="img-fluid" alt="Sample image">
+        </div>
+<div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1"  data-scroll-reveal="enter top move 30px over 0.6s after 0.4s">
+  <form method="POST" >
+    {% csrf_token %}
+    <div class="form-outline mb-4">
+    <label class="form-label" for="username">Username</label>
+     <input class="form-control" type="email" name="username" id="username">
+    </div>
+    <div class="form-outline mb-4">
+    <label class="form-label" for="password">Password</label>
+    <input class="form-control" type="password" name="password" id="password">
+</div>
+{% if messages %}
+<div class="alert alert-danger">
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
+
+
+<input class="btn btn-primary btn-block mb-4" style="background-color: #8261ee;" type="submit" value="submit">
+  </form>
+</div>
+      </div>
+    </div></section></div>
+ <!-- ***** Welcome Area End ***** -->
+    <!-- jQuery -->
+    <script src="{% static 'main/js/jquery-2.1.0.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'main/js/popper.js' %}"></script>
+    <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugins -->
+    <script src="{% static 'main/js/scrollreveal.min.js' %}"></script>
+    <script src="{% static 'main/js/waypoints.min.js' %}"></script>
+    <script src="{% static 'main/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'main/js/imgfix.min.js' %}"></script> 
+    
+    <!-- Global Init -->
+    <script src="{% static 'main/js/custom.js' %}"></script>
+</body>
+
+</html>
