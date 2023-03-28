@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path,include
 from main.views import *
-from user.views import * 
+
 urlpatterns = [
     path('',index),
     path('events/',events),
@@ -26,7 +26,7 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('update/',update),
     path('login/',Login,name='login'),
-    path('dashboard/',dashboard,name='dashboard'),
+    path('dashboard/',include("user.urls"),name='dashboard'),
     path('logout/',Logout, name='logout'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

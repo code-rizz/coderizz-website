@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
+        <link rel = "icon" href ={% static 'main/images/logo.png' %}
+        type = "image/x-icon">
+        <title>CODERIZZ</title>
+    <!--
+    SOFTY PINKO
+    https://templatemo.com/tm-535-softy-pinko
+    -->
+    
+        <!-- Additional CSS Files -->
+        <link rel="stylesheet" type="text/css" href="{% static 'main/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/css/font-awesome.css' %}">
+
+    <link rel="stylesheet" href="{% static 'main/css/templatemo-softy-pinko.css' %}">
+    
+    </head>
+<body>
+ <!-- ***** Welcome Area End ***** -->
+    <!-- jQuery -->
+    <script src="{% static 'main/js/jquery-2.1.0.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'main/js/popper.js' %}"></script>
+    <script src="{% static 'main/js/bootstrap.min.js' %}"></script>
+
+    <!-- Plugins -->
+    <script src="{% static 'main/js/scrollreveal.min.js' %}"></script>
+    <script src="{% static 'main/js/waypoints.min.js' %}"></script>
+    <script src="{% static 'main/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'main/js/imgfix.min.js' %}"></script> 
+    
+    <!-- Global Init -->
+    <script src="{% static 'main/js/custom.js' %}"></script>
+</body>
+
+<table class="table">
+    <thead>
+      <tr style="background-color:#8261ee;">
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Link</th>
+        <th scope="col">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% block content %} 
+        {% for i,x in projects %}
+      <tr>
+        <th scope="row">{{i}}</th>
+        <td>{{x.project_name}}</td>
+        <td>{{x.project_description}}</td>
+        <td>{{x.project_link}}</td>
+        <td><a class="btn btn-danger" href="projects/delete/{{i}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      </tr>
+      {% endfor %} 
+      {% endblock content %} 
+      <form action="projects/add" method="POST">
+        {% csrf_token %}
+        <tr>
+            <th scope="row">-1</th>
+            <td><input type="text" class="form-control" name="name" required></td>
+            <td><input type="text" class="form-control" name="details" required></td>
+            <td><input type="url" class="form-control" name="url" required></td>
+            <td><input class="btn btn-success" style="font-weight:bolder;font-size:1rem ;" type="submit" value="+"></td>
+        </tr>
+      </form>
+     
+    </tbody>
+  </table>
+    <p>{{i}}. {{x.project_name}}</p>
+   
+
+</html>

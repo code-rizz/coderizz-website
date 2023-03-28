@@ -1,11 +1,16 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.core.mail import send_mail
 from .models import Projects
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from user.models import User
 
 # Create your views here.
 def index(request):
     myProject = Projects.objects.all()
     no_of_projects = len(myProject)
+    users = len(User.objects.all())
     if request.method == "POST":
         name = request.POST['name']
         email = request.POST['email']
@@ -49,3 +54,30 @@ def update(request):
             return render(request,'update.html',locals())
     else:
         return HttpResponse("not allowed")
+    
+def Login(request):
+    if request.method == 'GET' and request.user.is_authenticated:
+        return redirect('/dashboard')
+    if request.method == 'POST':
+  
+        # AuthenticationForm_can_also_be_used__
+  
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username = username, password = password)
+        if user is not None:
+            login(request, user)
+            if "next" in request.GET.keys():
+                next = request.GET['next']
+                return redirect(next)
+            return redirect('dashboard')
+        else:
+            messages.warning(request, f'Invalid username or password')
+    return render(request, 'login.html')
+
+
+@login_required
+def Logout(request):
+    logout(request)
+    return redirect('/')
+    

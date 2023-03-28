@@ -74,22 +74,28 @@
             class="img-fluid" alt="Sample image">
         </div>
 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1"  data-scroll-reveal="enter top move 30px over 0.6s after 0.4s">
-  <form method="POST" >
+  <form method="POST" class="needs-validation" novalidate>
     {% csrf_token %}
     <div class="form-outline mb-4">
     <label class="form-label" for="username">Username</label>
-     <input class="form-control" type="email" name="username" id="username">
+     <input class="form-control" type="email" name="username" id="username" required>
+     <div class="invalid-feedback">
+        Enter a Valid Username
+      </div>
     </div>
     <div class="form-outline mb-4">
     <label class="form-label" for="password">Password</label>
-    <input class="form-control" type="password" name="password" id="password">
+    <input class="form-control" type="password" name="password" id="password" required>
+    <div class="invalid-feedback">
+        Enter a Valid Password
+      </div>
 </div>
 {% if messages %}
+{% for message in messages %}
 <div class="alert alert-danger">
-    {% for message in messages %}
     {{ message }}
-    {% endfor %}
 </div>
+    {% endfor %}
 {% endif %}
 
 
@@ -98,6 +104,26 @@
 </div>
       </div>
     </div></section></div>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+          'use strict';
+          window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+              form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+              }, false);
+            });
+          }, false);
+        })();
+        </script>
  <!-- ***** Welcome Area End ***** -->
     <!-- jQuery -->
     <script src="{% static 'main/js/jquery-2.1.0.min.js' %}"></script>
