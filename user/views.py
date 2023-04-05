@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from main.models import Projects
+from .models import User
 
 # Create your views here.
 
@@ -12,7 +13,14 @@ from main.models import Projects
 @login_required
 def dashboard(request):
     if request.user.role == 1:
-        return render(request, 'admin.html',{'name':request.user})
+        print(f"h:{request.user.password}") 
+        user = request.user
+        users = User.objects.all()
+        no_admin = len(users.filter(role = 1))
+        no_modrator = len(users.filter(role = 2))
+        no_member = len(users.filter(role = 3))
+        no_user = len(users)
+        return render(request, 'admin-dashboard.html',locals())
     
 @login_required
 def project(request):

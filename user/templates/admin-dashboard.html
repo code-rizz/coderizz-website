@@ -1,0 +1,103 @@
+{% extends 'admin-base.html' %} 
+{% load static %}
+ {% block style %}
+    .subtxt{
+        color: #A759D1;
+    }
+    .profile{
+        width: 70px; height: 70px;
+        border-radius:100%;
+    }
+
+    
+
+table.sticky-headers { width:100%; }
+table.sticky-headers thead tr th { text-align:left; position:sticky; top:0; background:#fff; }
+
+ {% endblock %}
+{% block title %}summa{% endblock %}
+
+{% block subtitle %}
+<div class="d-flex flex-column text-center  subtitle" style="padding:50px">
+    <div><h1 class=" subtitle" style="font-weight:800;">{{no_user}}</h1></div>
+    <div class="subtxt  subtitle"><h5>Total User</h5></div></div>
+
+    <div class="d-flex flex-column text-center  subtitle" style="padding:50px">
+    <div><h1 class=" subtitle" style="font-weight:800;">{{no_member}}</h1></div>
+    <div class="subtxt  subtitle"><h5>Members</h5></div></div>
+
+    <div class="d-flex flex-column text-center  subtitle" style="padding:50px">
+        <div><h1 class=" subtitle" style="font-weight:800;">{{no_modrator}}</h1></div>
+        <div class="subtxt subtitle"><h5>Moderator</h5></div></div>
+
+    <div class="d-flex flex-column text-center  subtitle" style="padding:50px">
+        <div><h1 class=" subtitle" style="font-weight:800;">{{no_admin}}</h1></div>
+        <div class="subtxt  subtitle"><h5>Admin</h5></div></div>
+ {% endblock %}
+
+ {% block content %}
+        <div class="p-3" style="
+            width:100%%;
+            height:100%;
+            overflow-y:hidden;
+        ">
+        <div class="scbar" style="
+        width:100%%;
+            height:100%;
+        border-radius: 12px;
+        box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        overflow-y: scroll;
+        overflow-x:hidden;
+        ">
+        
+        <table class="table sticky-headers" style="overflow-y: scroll;">
+            <thead style:"">
+                <tr>
+                    <div style="position:absolute; display:block;" >
+                  <th>User</th>
+                  <th>Role</th>
+                  <th class="sdeskContent sticky-headers">Added On</th>
+                    </div>
+                </tr>
+              </thead>
+              <tbody>
+                {% for u in users %}
+                <tr>
+                    <td><div class="d-flex flex-row pl-2">
+                      <div>
+                          <img class="profile" 
+             src="{% static 'main/images/final mascot.png' %}" alt="">
+                      </div>
+                      <div class="d-flex flex-column ">
+                          <div class="ml-3 my-auto">
+                          <p >{{u.first_name}}</p>
+                          <p class="deskContent ">{{u.email}}</p>
+                          </div>
+                      </div>
+                    </div>
+                  </td>
+                  {% if u.role == 1 %}
+                  <td class="mr-2" style="
+                  height:100%;%
+                  vertical-align:center;">
+                      <p class="my-auto">Admin</p>
+                    </td>{% endif %}
+                    {% if u.role == 2 %}
+                  <td><div>
+                      Moderator
+                    </div></td>{% endif %}
+                    {% if u.role == 3 %}
+                  <td><div>
+                      Members
+                    </div></td>{% endif %}
+                  </td>
+                  <td class="deskContent"><div>
+                      {{u.created_date}}
+                    </div></td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+        </table>
+        </div>
+    </div>
+ {% endblock %}

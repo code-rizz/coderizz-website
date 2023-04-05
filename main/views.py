@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from user.models import User
+import re
 
 # Create your views here.
 def index(request):
@@ -80,4 +81,29 @@ def Login(request):
 def Logout(request):
     logout(request)
     return redirect('/')
+
+def register(request):
+    if request.method == 'POST':
+        print(request.POST)
+        print("======================================================")
+        print(re.match(r"^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$])[\w\d@#$]{6,18}$",request.POST.get('password', "")))
+        if request.POST.get('name', None) is None:
+            messages.warning(request, f'Enter a valid name')
+        elif (not (re.fullmatch( r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b',request.POST.get('email', None)))):
+            messages.warning(request, f'Enter a valid mail address')
+        elif not re.fullmatch(r'[A-Za-z0-9@#$%^\*&+=]{8,}',request.POST.get('password', "")):
+            messages.warning(request, f'give  a valid password') 
+        elif not re.match(r'/^[0-9]{10}$/',request.POST.get('phone_number', "")):
+            messages.warning(request, f'Enter a valid Phone Number')
+        elif not re.match(r'/^[0-9]{12}$/',request.POST.get('register_number', "")):
+            messages.warning(request, f'Enter a valid Register Number')
+        elif not re.match(r'/^[0-9]{4}$/',request.POST.get('year_of_passing', "")):
+            messages.warning(request, f'Enter a valid Phone Number')
+        else:
+            print(request.POST)
+            return redirect("/register")
+        
+    return render(request, 'register.html')
+
+    
     
