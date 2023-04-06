@@ -15,7 +15,39 @@ table.sticky-headers { width:100%; }
 table.sticky-headers thead tr th { text-align:left; position:sticky; top:0; background:#fff; }
 
  {% endblock %}
-{% block title %}summa{% endblock %}
+
+{% block script %}
+
+const searchInputDropdown = document.getElementById('search-input-dropdown');
+const dropdownOptions = document.querySelectorAll('.input-group-dropdown-item');
+
+searchInputDropdown.addEventListener('input', () => {
+  const filter = searchInputDropdown.value.toLowerCase();
+  showOptions();
+  const valueExist = !!filter.length;
+
+  if (valueExist) {
+    dropdownOptions.forEach((el) => {
+      const elText = el.textContent.trim().toLowerCase();
+      const isIncluded = elText.includes(filter);
+      if (!isIncluded) {
+        el.style.display = 'none';
+      }
+    });
+  }
+});
+
+const showOptions = () => {
+  dropdownOptions.forEach((el) => {
+    el.style.display = 'flex';
+  })
+}
+
+{% endblock %}
+
+
+
+{% block title %}hello{% endblock %}
 
 {% block subtitle %}
 <div class="d-flex flex-column text-center  subtitle" style="padding:50px">
@@ -37,12 +69,12 @@ table.sticky-headers thead tr th { text-align:left; position:sticky; top:0; back
 
  {% block content %}
         <div class="p-3" style="
-            width:100%%;
+            width:100%;
             height:100%;
             overflow-y:hidden;
         ">
         <div class="scbar" style="
-        width:100%%;
+        width:100%;
             height:100%;
         border-radius: 12px;
         box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -56,6 +88,42 @@ table.sticky-headers thead tr th { text-align:left; position:sticky; top:0; back
                     <div style="position:absolute; display:block;" >
                   <th>User</th>
                   <th>Role</th>
+                  <div class="d-flex flex-row">
+                    <input class="form-control dropdown-toggle hidden-arrow " id="myInput" type="text" placeholder="Search User">
+                    <a
+  class="dropdown-toggle hidden-arrow btn btn-primary"
+  href="#"
+  id="navbarDropdownMenuLink"
+  role="button"
+  data-mdb-toggle="dropdown"
+  aria-expanded="false"
+>
+  dropdown
+</a>
+<ul class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+  <li>
+    <div class="input-group mt-2 mx-2">
+      <div class="form-outline w-auto">
+        <input type="search" id="form1" class="form-control-dropdown" />
+        <label class="form-label" for="form1">Search</label>
+      </div>
+    </div>
+  </li>
+  <li><hr class="dropdown-divider" /></li>
+  <li><a class="dropdown-item" href="#">Action</a></li>
+  <li><a class="dropdown-item" href="#">Another action</a></li>
+  <li><a class="dropdown-item" href="#">Something else here</a></li>
+</ul>
+                    </div>
+                  </div>
+                  
+                  
+
+                  <!-- <ul class="list-group" id="myList">
+                    <li class="list-group-item">Coderizz</li>
+                    <li class="list-group-item">sandy</li>
+                  </ul>  -->
+
                   <th class="sdeskContent sticky-headers">Added On</th>
                     </div>
                 </tr>
@@ -70,7 +138,7 @@ table.sticky-headers thead tr th { text-align:left; position:sticky; top:0; back
                       </div>
                       <div class="d-flex flex-column ">
                           <div class="ml-3 my-auto">
-                          <p >{{u.first_name}}</p>
+                          <p>{{u.first_name}}</p>
                           <p class="deskContent ">{{u.email}}</p>
                           </div>
                       </div>
@@ -78,7 +146,7 @@ table.sticky-headers thead tr th { text-align:left; position:sticky; top:0; back
                   </td>
                   {% if u.role == 1 %}
                   <td class="mr-2" style="
-                  height:100%;%
+                  height:100%;
                   vertical-align:center;">
                       <p class="my-auto">Admin</p>
                     </td>{% endif %}

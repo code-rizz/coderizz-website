@@ -10,6 +10,11 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
         <link rel = "icon" href ={% static 'main/images/logo.png' %}
         type = "image/x-icon">
+         
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
         <title>CODERIZZ</title>
         <style>
             input::-webkit-outer-spin-button,
@@ -278,7 +283,7 @@ input[type=number] {
                 <a class="nav-link active" href="#">Content Library</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Projects</a>
+                <a class="nav-link" href="projects">Projects</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="#">Calendar</a>
@@ -350,7 +355,8 @@ input[type=number] {
     button2.hidden = !button2.hidden;
     
   }
-  {% block script %}{% endblock %}
+  {% block script %}
+  {% endblock %}
 </script>
       <!-- jQuery -->
       <script src="{% static 'main/js/jquery-2.1.0.min.js' %}"></script>

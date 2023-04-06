@@ -1,0 +1,229 @@
+{% extends 'admin-base.html' %} 
+{% load static %}
+ {% block style %}
+ @import url("https://fonts.googleapis.com/css?family=Roboto");
+ @-webkit-keyframes come-in {
+   0% {
+     -webkit-transform: translatey(100px);
+             transform: translatey(100px);
+     opacity: 0;
+   }
+   30% {
+     -webkit-transform: translateX(-50px) scale(0.4);
+             transform: translateX(-50px) scale(0.4);
+   }
+   70% {
+     -webkit-transform: translateX(0px) scale(1.2);
+             transform: translateX(0px) scale(1.2);
+   }
+   100% {
+     -webkit-transform: translatey(0px) scale(1);
+             transform: translatey(0px) scale(1);
+     opacity: 1;
+   }
+ }
+ @keyframes come-in {
+   0% {
+     -webkit-transform: translatey(100px);
+             transform: translatey(100px);
+     opacity: 0;
+   }
+   30% {
+     -webkit-transform: translateX(-50px) scale(0.4);
+             transform: translateX(-50px) scale(0.4);
+   }
+   70% {
+     -webkit-transform: translateX(0px) scale(1.2);
+             transform: translateX(0px) scale(1.2);
+   }
+   100% {
+     -webkit-transform: translatey(0px) scale(1);
+             transform: translatey(0px) scale(1);
+     opacity: 1;
+   }
+ }
+ * {
+   margin: 0;
+   padding: 0;
+ }
+ 
+ html, body {
+   background: #eaedf2;
+   font-family: 'Roboto', sans-serif;
+ }
+ 
+ .floating-container {
+   position: fixed;
+   width: 100px;
+   height: 100px;
+   bottom: 0;
+   right: 0;
+   margin: 35px 25px;
+ }
+ .floating-container:hover {
+   height: 300px;
+ }
+ .floating-container:hover .floating-button {
+   box-shadow: 0 10px 25px rgba(44, 179, 240, 0.6);
+   -webkit-transform: translatey(5px);
+           transform: translatey(5px);
+   -webkit-transition: all 0.3s;
+   transition: all 0.3s;
+ }
+ .floating-container:hover .element-container .float-element:nth-child(1) {
+   -webkit-animation: come-in 0.4s forwards 0.2s;
+           animation: come-in 0.4s forwards 0.2s;
+ }
+ .floating-container:hover .element-container .float-element:nth-child(2) {
+   -webkit-animation: come-in 0.4s forwards 0.4s;
+           animation: come-in 0.4s forwards 0.4s;
+ }
+ .floating-container:hover .element-container .float-element:nth-child(3) {
+   -webkit-animation: come-in 0.4s forwards 0.6s;
+           animation: come-in 0.4s forwards 0.6s;
+ }
+ .floating-container .floating-button {
+   position: absolute;
+   width: 65px;
+   height: 65px;
+   background: #2cb3f0;
+   bottom: 0;
+   border-radius: 50%;
+   left: 0;
+   right: 0;
+   margin: auto;
+   color: white;
+   line-height: 65px;
+   text-align: center;
+   font-size: 23px;
+   z-index: 100;
+   box-shadow: 0 10px 25px -5px rgba(44, 179, 240, 0.6);
+   cursor: pointer;
+   -webkit-transition: all 0.3s;
+   transition: all 0.3s;
+ }
+ .floating-container .float-element {
+   position: relative;
+   display: block;
+   border-radius: 50%;
+   width: 50px;
+   height: 50px;
+   margin: 15px auto;
+   color: white;
+   font-weight: 500;
+   text-align: center;
+   line-height: 50px;
+   z-index: 0;
+   opacity: 0;
+   -webkit-transform: translateY(100px);
+           transform: translateY(100px);
+ }
+ .floating-container .float-element .material-icons {
+   vertical-align: middle;
+   font-size: 16px;
+ }
+ .floating-container .float-element:nth-child(1) {
+   background: #42A5F5;
+   box-shadow: 0 20px 20px -10px rgba(66, 165, 245, 0.5);
+ }
+ .floating-container .float-element:nth-child(2) {
+   background: #4CAF50;
+   box-shadow: 0 20px 20px -10px rgba(76, 175, 80, 0.5);
+ }
+ .floating-container .float-element:nth-child(3) {
+   background: #FF9800;
+   box-shadow: 0 20px 20px -10px rgba(255, 152, 0, 0.5);
+ }
+ 
+ {% endblock %}
+
+{% block script %}
+$('#tab').on('click','tr', function(){
+   alert('do you want to delete project')
+});
+
+{% endblock %}
+ {% block title %}
+ Projects
+ {% endblock %}
+
+
+ {% block subtitle %}
+<div class="d-flex flex-column text-center  subtitle" style="padding:50px"></div>
+ {% endblock %}
+
+
+ {% block content %}
+ <div class="p-3" style="
+            width:100%;
+            height:100%;
+            overflow-y:hidden;
+        ">
+        <div class="scbar" style="
+        width:100%;
+            height:100%;
+        border-radius: 12px;
+        box-shadow:0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        overflow-y: scroll;
+        overflow-x:hidden;
+        ">
+        
+
+ <table class="table table-hover" id="tab">
+    <thead>
+      <tr style="background-color:#A759D1; color:white;">
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Link</th>
+        <th scope="col">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for i,x in projects %}
+      <tr>
+        <th scope="row">{{i}}</th>
+        <td>{{x.project_name}}</td>
+        <td>{{x.project_description}}</td>
+        <td>{{x.project_link}}</td>
+        <td><a class="btn btn-danger" href="projects/delete/{{i}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+      </tr>
+      {% endfor %} 
+      <form action="projects/add" method="POST">
+        {% csrf_token %}
+        <tr>
+            <th scope="row">-1</th>
+            <td><input type="text" class="form-control" name="name" required></td>
+            <td><input type="text" class="form-control" name="details" required></td>
+            <td><input type="url" class="form-control" name="url" required></td>
+            <td><input class="btn btn-success" style="font-weight:bolder;font-size:1rem ;" type="submit" value="+"></td>
+        </tr>
+      </form>
+     
+    </tbody>
+  </table>
+  </div>
+  </div>
+
+  <div>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="floating-container">
+  <div class="floating-button">+</div>
+  <div class="element-container">
+
+    <a href="google.com"> <span class="float-element tooltip-left">
+      <i class="material-icons">phone
+      </i></a>
+    </span>
+      <span class="float-element">
+      <i class="material-icons">email
+</i>
+    </span>
+      <span class="float-element">
+      <i class="material-icons">chat</i>
+    </span>
+  </div>
+</div>
+  </div>
+
+  {% endblock %}

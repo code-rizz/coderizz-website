@@ -26,7 +26,7 @@ def dashboard(request):
 def project(request):
     if request.user.role == 1:
         projects = enumerate(Projects.objects.all())
-        return render(request, 'project.html',{'projects':projects})
+        return render(request, 'admin-project.html',{'projects':projects})
 
 
 @login_required
