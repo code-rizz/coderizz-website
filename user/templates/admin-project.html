@@ -134,13 +134,15 @@
    background: #FF9800;
    box-shadow: 0 20px 20px -10px rgba(255, 152, 0, 0.5);
  }
+ .modbtn:hover{
+    background-color:#A759D1;
+    color:white;
+  }
  
  {% endblock %}
 
 {% block script %}
-$('#tab').on('click','tr', function(){
-   alert('do you want to delete project')
-});
+
 
 {% endblock %}
  {% block title %}
@@ -176,18 +178,20 @@ $('#tab').on('click','tr', function(){
         <th scope="col">Name</th>
         <th scope="col">Description</th>
         <th scope="col">Link</th>
-        <th scope="col">Options</th>
       </tr>
     </thead>
     <tbody>
         {% for i,x in projects %}
-      <tr>
+      <tr data-toggle="modal" data-target="#myModal">
+        <a data-toggle="modal" data-target="#myModal" href="">
         <th scope="row">{{i}}</th>
         <td>{{x.project_name}}</td>
         <td>{{x.project_description}}</td>
         <td>{{x.project_link}}</td>
-        <td><a class="btn btn-danger" href="projects/delete/{{i}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+        
+    </a>
       </tr>
+
       {% endfor %} 
       <form action="projects/add" method="POST">
         {% csrf_token %}
@@ -196,14 +200,44 @@ $('#tab').on('click','tr', function(){
             <td><input type="text" class="form-control" name="name" required></td>
             <td><input type="text" class="form-control" name="details" required></td>
             <td><input type="url" class="form-control" name="url" required></td>
-            <td><input class="btn btn-success" style="font-weight:bolder;font-size:1rem ;" type="submit" value="+"></td>
+            
         </tr>
       </form>
      
     </tbody>
   </table>
+
+   
+
   </div>
   </div>
+
+
+  
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 style="color:red; font-style: bold;">Do you want to delete?</h4>
+        </div>
+        <div class="modal-body">
+           <h4>project name:</h4>summa
+           <h4>project description:</h4>Encryption is the act of encoding a message so that only the intended users can see it. We encrypt data because we don’t want anyone to see or access it.
+           <h4>link:<a href="http://localhost:8000/">http://localhost:8000/</a></h4>
+        </div>
+        <div class="d-flex flex-row">
+            <button type="button" class="btn btn-default mx-auto modbtn" style="width:100%;" data-dismiss="modal" id="btn">Yes</button>
+          <button type="button" class="btn btn-default mx-auto modbtn " style="width:100%;" data-dismiss="modal" id="btn">No</button>
+          
+          <!--<a class="btn btn-danger" href=""><i class="fa fa-trash" aria-hidden="true"></i></a>-->
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
 
   <div>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
