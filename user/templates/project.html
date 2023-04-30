@@ -49,18 +49,17 @@
         <th scope="col">#</th>
         <th scope="col">Name</th>
         <th scope="col">Description</th>
-        <th scope="col">Link</th>
-        <th scope="col">Options</th>
+        <th class="deskContent" scope="col">Liink</th>\
       </tr>
     </thead>
     <tbody>
         {% block content %} 
         {% for i,x in projects %}
-      <tr>
+      <tr class="text_a">
         <th scope="row">{{i}}</th>
-        <td>{{x.project_name}}</td>
+        <td class="text_a">{{x.project_name}}</td>
         <td>{{x.project_description}}</td>
-        <td>{{x.project_link}}</td>
+        <td class="deskContent">{{x.project_link}}</td>
         <td><a class="btn btn-danger" href="projects/delete/{{i}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
       </tr>
       {% endfor %} 

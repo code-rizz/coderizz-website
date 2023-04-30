@@ -12,7 +12,7 @@ from .models import User
 
 @login_required
 def dashboard(request):
-    if request.user.role == 1:
+    if request.user.role in [1]:
         print(f"h:{request.user.password}") 
         user = request.user
         users = User.objects.all()
@@ -24,14 +24,15 @@ def dashboard(request):
     
 @login_required
 def project(request):
-    if request.user.role == 1:
+    if request.user.role in [1]:
         projects = enumerate(Projects.objects.all())
-        return render(request, 'project.html',{'projects':projects})
+        projects1 = enumerate(Projects.objects.all())
+        return render(request, 'admin-project.html',{'projects':projects})
 
 
 @login_required
 def del_project(request, id):
-    if request.user.role == 1:
+    if request.user.role in [1]:
         try:
             p = Projects.objects.all()[id]
             p.delete()
@@ -41,7 +42,7 @@ def del_project(request, id):
     
 @login_required
 def add_project(request):
-    if request.user.role == 1:            
+    if request.user.role in [1]:            
         if request.method ==   "POST":
             name = request.POST['name']
             details = request.POST['details']
@@ -49,3 +50,9 @@ def add_project(request):
             p = Projects(project_name=name, project_description=details,project_link=url)
             p.save()
         return redirect("projects")
+    
+@login_required
+def users(request, email):
+    if request.user.role in [1]:
+        user = User.objects.filter(email=email)
+        return render(request, 'users.html',{'user':user})

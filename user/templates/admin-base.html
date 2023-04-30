@@ -10,6 +10,11 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
         <link rel = "icon" href ={% static 'main/images/logo.png' %}
         type = "image/x-icon">
+         
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
         <title>CODERIZZ</title>
         <style>
             input::-webkit-outer-spin-button,
@@ -86,8 +91,11 @@ input[type=number] {
             width: 100;
             border-radius: 12px;
           }
+
+
           .nav a:hover{
-            background-color: rgba(167, 89, 209, 1);
+            background-color: rgba(167, 89, 209, 1)!important;
+            color: #fff;
           }
 
           .dropdown-item:active{
@@ -108,7 +116,7 @@ input[type=number] {
            background-color:#F1EEF5;
            
           }
-
+          
           .scbar::-webkit-scrollbar {
             width: 6px;
             
@@ -272,13 +280,13 @@ input[type=number] {
                 </div>
             <ul class="ml-3 nav flex-column mt-5 txt" style="font-size:19px">
                 <li class="nav-item">
-                    <h3 class="text-xl-left" >Dashboard</h3>
+                  <a class="nav-link active" href="/dashboard">Dashboard</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link active" href="#">Content Library</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Projects</a>
+                <a class="nav-link" href="projects">Projects</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="#">Calendar</a>
@@ -350,7 +358,8 @@ input[type=number] {
     button2.hidden = !button2.hidden;
     
   }
-  {% block script %}{% endblock %}
+  {% block script %}
+  {% endblock %}
 </script>
       <!-- jQuery -->
       <script src="{% static 'main/js/jquery-2.1.0.min.js' %}"></script>

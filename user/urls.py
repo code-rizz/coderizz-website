@@ -7,5 +7,6 @@ urlpatterns = [
     path("",dashboard, name="dashboard"),
     path("projects",project, name="projects"),
     path("projects/delete/<int:id>",del_project),
-    path("projects/add",add_project)
+    path("projects/add",add_project),
+    path("users/<email>",users, name="users"),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
