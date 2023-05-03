@@ -203,12 +203,12 @@ table.sticky-headers thead tr th { text-align:left; position:sticky; top:0;
 
 
  {% block content %}
- <div class="p-3" style="
+ <div class="p-3 " style="
             width:100%;
             height:100%;
             overflow-y:hidden;
         ">
-        <div class="scbar" style="
+        <div class="scbar  row row-cols-3" style="
         width:100%;
             height:100%;
         border-radius: 12px;
@@ -220,13 +220,24 @@ table.sticky-headers thead tr th { text-align:left; position:sticky; top:0;
         <div class="m-5">
             <div class="article-card">
               <div class="content">
-                <p class="date">No. of weeks : 1</p>
-                <p class="title">PYTHON</p>
+                <p class="date">No. of weeks : 5</p>
+                <p class="title">JAVA</p>
               </div>
               <img src="https://www.trio.dev/hubfs/Imported_Blog_Media/python_logo.jpg" alt="article-cover" />
             </div>
           </div>
         </a>
+        <a href="content">
+          <div class="m-5">
+              <div class="article-card">
+                <div class="content">
+                  <p class="date">No. of weeks : 1</p>
+                  <p class="title">PYTHON</p>
+                </div>
+                <img src="https://www.trio.dev/hubfs/Imported_Blog_Media/python_logo.jpg" alt="article-cover" />
+              </div>
+            </div>
+          </a>
 </div>
 </div>
  {% endblock %}
