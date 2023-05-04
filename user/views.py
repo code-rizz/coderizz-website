@@ -28,7 +28,14 @@ def project(request):
         projects = enumerate(Projects.objects.all())
         projects1 = enumerate(Projects.objects.all())
         return render(request, 'admin-project.html',{'projects':projects})
+    
+def content_library(request):
+    if request.user.role in [1]:
+        return render(request, 'content_library.html',{'content_library':content_library})
 
+
+def content(request):
+    return render(request, 'content.html',{'content':content})
 
 @login_required
 def del_project(request, id):
